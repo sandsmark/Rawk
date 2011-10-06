@@ -1,0 +1,5 @@
+DB_DSN = dbi:Pg:dbname=music;host=localhost
+DB_USER = music
+DB_PASS = password
+DEBUG = true
+
