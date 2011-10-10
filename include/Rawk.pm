@@ -42,7 +42,6 @@ sub db {
 
 $SIG{__DIE__} = sub {
     # TODO: maybe do the error handling here, send a stacktrace?
-    print STDERR "LOL DEADED\n";
 };
 
 END {
