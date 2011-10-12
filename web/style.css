@@ -1,0 +1,52 @@
+body, html {
+    background-image:url('bg.png');
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+
+#wrap {
+    width: 750px;
+    margin: 0 auto;
+}
+
+.button {
+    border: 15px black;
+    border-radius: 7px 7px 7px 7px;
+}
+.button:hover {
+    background-image:url('bg-blue.png');
+}
+
+
+#control {
+    border: 15px white;
+    background-image:url('bg-light.png');
+    border-radius: 7px 7px 7px 7px;
+    padding: 5px;
+    width:236px;
+    float:left;
+}
+
+#playlists {
+    border: 15px white;
+    background: white;
+    border-radius: 7px 7px 7px 7px;
+    padding: 5px;
+    list-style: none;
+}
+
+#playlist {
+    float: right;
+    width:486px;
+    border: 15px white;
+    background: white;
+    border-radius: 7px 7px 7px 7px;
+    padding: 5px;
+    list-style: none;
+}
+
+#footer {
+    clear: both;
+}
+

@@ -1,1 +1,38 @@
-hello
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rawk</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script type="text/javascript" src="jquery-1.6.4.js"></script>
+  <script type="text/javascript" src="player.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <h1>Rawk</h1>
+        </div>
+        <div id="control">
+            <a href="javascript:pause()" ><img class="button" src="_play.png" /></a>
+            <a href="javascript:next()" ><img class="button" src="_pause.png" /></a>
+            <div id="nowplaying">–</div>
+            <h3>playlists</h3>
+            <ul id="playlists">
+            </ul>
+            <h3>artists</h3>
+            <ul id="artists">
+            </ul>
+            <h3>albums</h3>
+            <ul id="albums">
+            </ul>
+        </div>
+            <ul id="playlist">
+                <li><a href="javascript:play(12);">celldweller - switchback [3:57]</a></li>
+            </ul>
+        <div id="footer">
+            <p>&copy; 2011 martin t. sandsmark</p>
+        </div>
+    </div>
+</body>
+</html>
+

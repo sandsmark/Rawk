@@ -15,7 +15,7 @@ my $query;
 if (defined($album)) {
     $query = Rawk::db->prepare(q{
         SELECT DISTINCT
-            song.title, artist.name, album.name, song.tracknumber, song.length
+            song.id, artist.name || ' - ' ||  song.title || ' (' || song.length || ')', song.tracknumber
         FROM song, artist, album
         WHERE
             album = ?
