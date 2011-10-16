@@ -13,12 +13,12 @@ my $artist = CGI::param('artist');
 my $query;
 if (defined($artist)) {
     $query = Rawk::db->prepare(q{
-        SELECT id, name FROM artist WHERE name LIKE ?
+        SELECT DISTINCT id, name FROM artist WHERE name ILIKE ? ORDER BY name LIMIT 10
         });
     $query->execute("%$artist%");
 } else {
     $query = Rawk::db->prepare(q{
-        SELECT id, name FROM artist
+        SELECT DISTINCT id, name, random() FROM artist ORDER BY random() LIMIT 10
         });
     $query->execute();
 }

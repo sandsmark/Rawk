@@ -12,10 +12,11 @@ my $album = CGI::param('album');
 my $playlist = CGI::param('playlist');
 
 my $query;
+#song.id, artist.name || ' - ' ||  song.title || ' (' || song.length || ')', song.tracknumber
 if (defined($album)) {
     $query = Rawk::db->prepare(q{
         SELECT DISTINCT
-            song.id, artist.name || ' - ' ||  song.title || ' (' || song.length || ')', song.tracknumber
+            song.id, artist.name || ' - ' ||  song.title, song.tracknumber
         FROM song, artist, album
         WHERE
             album = ?

@@ -18,7 +18,7 @@ if (!defined($artist)) {
 
 
 my $query = Rawk::db->prepare(q{
-    SELECT DISTINCT album.id, album.name FROM album LEFT JOIN song ON song.album = album.id WHERE song.artist = ?
+    SELECT DISTINCT album.id, album.name FROM album LEFT JOIN song ON song.album = album.id WHERE song.artist = ? ORDER BY album.name
 });
 $query->execute($artist);
 
