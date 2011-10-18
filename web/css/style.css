@@ -152,3 +152,7 @@ li.selectable :hover {
  background-color:#eee;
 }
 
+#selectable-active {
+ background-color:blue;
+}
+

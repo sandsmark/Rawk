@@ -31,7 +31,7 @@ function replace_playlist(data) {
       var items = [];
 
       $.each(data, function(song_id, val) {
-          items.push('<li id="' + song_id + '"><a href="cgi-bin/get-song.pl?id=' + val[0] + '" class="playable">' + val[1] + '</a></li>');
+          items.push('<li song="' + val[0] + '" id="song' + song_id + '"><a href="cgi-bin/get-song.pl?id=' + val[0] + '" class="playable">' + val[1] + '</a></li>');
           });
 
       $('.playlist').remove();
@@ -39,6 +39,11 @@ function replace_playlist(data) {
           'class': 'playlist',
           html: items.join('')
           }).appendTo('#playlistcontainer');
+
+      $('.playlist li').draggable({
+        appendTo: 'body',
+        helper: 'clone'
+      });
 }
 
 function get_playlists() {
@@ -46,7 +51,7 @@ function get_playlists() {
       var items = [];
 
       $.each(data, function(listId, album) {
-          items.push('<li class="selectable" id="playlist' + listId + '"><a href="javascript:replace_playlist_with_playlist(' + album[0] + ')">' + album[1] + '</a></li>');
+          items.push('<li playlist="' + album[0] + '" class="selectable" id="playlist' + listId + '"><a href="javascript:replace_playlist_with_playlist(' + album[0] + ')">' + album[1] + '</a></li>');
           });
 
       $('#playlists').remove();
@@ -54,7 +59,16 @@ function get_playlists() {
           'id': 'playlists',
           html: items.join('')
           }).appendTo('#playlistsbox');
+      $('#playlists li').droppable({
+        activeClass: 'selectable',
+        hoverClass: 'selectable-active',
+           drop: function(event, ui) { 
+                var song = ui.draggable.attr('song');
+                var playlist = $(this).attr('playlist');
+                $.get('cgi-bin/add-song-to-playlist.pl', 'song=' + song + '&playlist=' + playlist);
+           }
       });
+  });
 }
 
 function replace_albums_for_artist(artist) {
