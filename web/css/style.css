@@ -2,6 +2,7 @@ body, html {
     margin: 0;
     padding: 0;
     color: #000;
+    background: #fff;
 }
 
 #wrap {
@@ -12,68 +13,99 @@ body, html {
     border: 15px black;
     border-radius: 7px 7px 7px 7px;
 }
+
 h1 {
     font-family: sans-serif;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0px;
+    text-align: right;
 }
 
 #control {
     border: 15px white;
     border-radius: 7px 7px 7px 7px;
     padding: 5px;
-    width:20%;
+    width:300px;
     float:left;
 
 }
 
 #playlists {
-    border: 15px white;
-    background: white;
-    border-radius: 7px 7px 7px 7px;
-    padding: 5px;
-    list-style: none;
-    -moz-box-shadow: 0px 0px 10px gray; /* Firefox */
-    -webkit-box-shadow: 0px 0px 10px gray; /* Safari/Chrome */
-    box-shadow: 0px 0px 10px gray; /* Opera and other CSS3 supporting browsers */
+    padding: 0px;
+    margin: 0px;
 }
 
 #artists {
+    padding: 0px;
+    margin: 0px;
+}
+
+.containerbox {
     border: 15px white;
     background: white;
     border-radius: 7px 7px 7px 7px;
     padding: 5px;
-    list-style: none;
     -moz-box-shadow: 0px 0px 10px gray; /* Firefox */
     -webkit-box-shadow: 0px 0px 10px gray; /* Safari/Chrome */
     box-shadow: 0px 0px 10px gray; /* Opera and other CSS3 supporting browsers */
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #albums {
-    border: 15px white;
-    background: white;
-    border-radius: 7px 7px 7px 7px;
-    padding: 5px;
-    list-style: none;
-    -moz-box-shadow: 0px 0px 10px gray; /* Firefox */
-    -webkit-box-shadow: 0px 0px 10px gray; /* Safari/Chrome */
-    box-shadow: 0px 0px 10px gray; /* Opera and other CSS3 supporting browsers */
+    padding: 0px;
+    margin: 0px;
 }
 
-.playlist {
-    float: right;
-    width: 75%;
-    border: 15px white;
-    background: white;
-    border-radius: 7px 7px 7px 7px;
-    padding: 5px;
-    list-style: none;
+#playlistcontainer {
     -moz-box-shadow: 0px 0px 10px gray; /* Firefox */
     -webkit-box-shadow: 0px 0px 10px gray; /* Safari/Chrome */
     box-shadow: 0px 0px 10px gray; /* Opera and other CSS3 supporting browsers */
+    margin-left: 320px;
+    border: 15px white;
+    background: white;
+    border-radius: 0px 0px 0px 7px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
 
+li {
+    list-style: none;
+/*    background-color:#f9f9f9;*/
+    background: #fff;
+    display:block;
+}
+
+li a {
+    display:block;
+}
+
+li a:hover {
+}
+
+
+a {
+    color: black;
+    text-decoration: none;
 }
 
 #footer {
     clear: both;
+    background: black;
+    font-family: courier;
+    font-size: 0.75em;
+    color: white;
+    padding: 5px;
+    -webkit-box-shadow: 0px 0px 10px gray; /* Safari/Chrome */
+    box-shadow: 0px 0px 15px black; /* Opera and other CSS3 supporting browsers */
+}
+#footer a {
+    color: white;
+    text-decoration: underline;
 }
 
 #soundmanager-debug {
@@ -81,4 +113,38 @@ h1 {
     color: white;
     font-size: 0.75em;
     font-family: courier;
+    height:200px;
+    overflow:scroll;
+    position: absolute;
+    bottom: 0px;
 }
+#sm2-container {
+    width:1px;
+    height:1px;
+    overflow:scroll;
+}
+
+input {
+    width: 180px;
+    margin: 0px;
+}
+
+li.selectable {
+    position:relative;
+    width:auto;
+    color:#666;
+    border:none;
+    letter-spacing:-1px; /* ZOMG WEB X.0. ;) */
+    font-size:1.2em;
+    background-color:#fff;
+    -moz-transition: background-color 15s linear 0s; /* firefox 4 */
+    -webkit-transition-property: hover;
+    -webkit-transition: background-color 0.15s ease-in-out;
+    -o-transition-property: background-color; /* opera 10.5 */
+    -o-transition-duration: 0.15s;
+}
+
+li.selectable :hover {
+ background-color:#eee;
+}
+

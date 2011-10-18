@@ -2,14 +2,14 @@ $(document).ready(function() {
   $.getJSON('cgi-bin/get-artists.pl', function(data) {
       var items = [];
 
-      $.each(data, function(key, val) {
-          items.push('<li id="' + key + '"><a href="javascript:getAlbums(' + val[0] + ')">' + val[1] + '</a></li>');
+      $.each(data, function(listId, artist) {
+          items.push('<li class="selectable" id="' + listId + '"><a href="javascript:getAlbums(' + artist[0] + ')">' + artist[1] + '</a></li>');
           });
 
       $('<ul/>', {
-          'class': 'my-new-list',
+          'id': 'artists',
           html: items.join('')
-          }).appendTo('#artists');
+          }).appendTo('#artistsbox');
       });
   getSongsForAlbum(427);
 });
@@ -18,15 +18,15 @@ function getAlbums(artist) {
   $.getJSON('cgi-bin/get-albums.pl?artist=' + artist, function(data) {
       var items = [];
 
-      $.each(data, function(key, val) {
-          items.push('<li id="' + key + '"><a href="javascript:getSongsForAlbum(' + val[0] + ')">' + val[1] + '</a></li>');
+      $.each(data, function(listId, album) {
+          items.push('<li class="selectable" id="' + listId + '"><a href="javascript:getSongsForAlbum(' + album[0] + ')">' + album[1] + '</a></li>');
           });
 
-      $('#albums li').remove();
+      $('#albums').remove();
       $('<ul/>', {
-          'class': 'my-new-list',
+          'id': 'albums',
           html: items.join('')
-          }).appendTo('#albums');
+          }).appendTo('#albumsbox');
       });
 }
 
@@ -34,15 +34,15 @@ function getSongsForAlbum(album) {
   $.getJSON('cgi-bin/get-songs.pl?album=' + album, function(data) {
       var items = [];
 
-      $.each(data, function(key, val) {
-          items.push('<li id="' + key + '"><a href="cgi-bin/get-song.pl?id=' + val[0] + '" class="playable">' + val[1] + '</a></li>');
+      $.each(data, function(song_id, val) {
+          items.push('<li id="' + song_id + '"><a href="cgi-bin/get-song.pl?id=' + val[0] + '" class="playable">' + val[1] + '</a></li>');
           });
 
-      $('.playlist li').remove();
+      $('.playlist').remove();
       $('<ul/>', {
-          'class': 'my-new-list',
+          'class': 'playlist',
           html: items.join('')
-          }).appendTo('.playlist');
+          }).appendTo('#playlistcontainer');
       });
 }
 
@@ -50,18 +50,18 @@ function artist_search(event, form) {
     var key = event.keyCode || event.which;
 //    if (key == 13) {
         var artist_string = $('#artistsearchinput').val();
-        $('#artists li').remove();
+        $('#artists').remove();
         $.getJSON('cgi-bin/get-artists.pl?artist=' + artist_string, function(data) {
                 var items = [];
 
                 $.each(data, function(key, val) {
-                    items.push('<li id="' + key + '"><a href="javascript:getAlbums(' + val[0] + ')">' + val[1] + '</a></li>');
+                    items.push('<li class="selectable" id="' + key + '"><a href="javascript:getAlbums(' + val[0] + ')">' + val[1] + '</a></li>');
                     });
 
                 $('<ul/>', {
-                    'class': 'my-new-list',
+                    'id': 'artists',
                     html: items.join('')
-                    }).appendTo('#artists');
+                    }).appendTo('#artistsbox');
                 });
   //  }
 

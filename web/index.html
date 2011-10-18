@@ -15,6 +15,7 @@ soundManager.useHighPerformance = true; // keep flash on screen, boost performan
 soundManager.wmode = 'transparent'; // transparent SWF, if possible
 soundManager.useFastPolling = true; // increased JS callback frequency
 soundManager.url = 'soundmanager/swf/';
+soundManager.debugMode = false;
 
 
 
@@ -40,24 +41,23 @@ var PP_CONFIG = {
 
     <div id="wrap">
         <div id="control">
-<!--            <h3>playlists</h3>
-            <input name="playlistsearch" />
-            <ul id="playlists">
-            </ul>-->
-
-            <h3>artists</h3>
-            <input id="artistsearchinput" onkeypress="javascript:artist_search(event, this.form);"/>
-            <ul id="artists">
-            </ul>
-            <h3>albums</h3>
+            <div id="playlistsbox" class="containerbox">
+                <h2>playlists</h2>
+                <!--           <input name="playlistsearch" />-->
+                <a href="javascript:add_playlist()">add playlist</a>
+            </div>
+            <div id="artistsbox" class="containerbox">
+            <h2>artists</h2>
+                <input id="artistsearchinput" onkeypress="javascript:artist_search(event, this.form);"/>
+            </div>
+            <div id="albumsbox" class="containerbox">
+            <h2>albums</h2>
             <!--    <input name="albumsearch" />-->
-            <ul id="albums">
-            </ul>
+            </div>
         </div>
-         <ul class="playlist">
-            </ul>
+        <div id="playlistcontainer"></div>
         <div id="footer">
-            <p>&copy; 2011 martin t. sandsmark</p>
+            <p><a href="https://github.com/sandsmark/rawk">&copy; 2011 martin t. sandsmark</a></p>
         </div>
     </div>
 </body>

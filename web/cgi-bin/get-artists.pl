@@ -18,7 +18,11 @@ if (defined($artist)) {
     $query->execute("%$artist%");
 } else {
     $query = Rawk::db->prepare(q{
-        SELECT DISTINCT id, name, random() FROM artist ORDER BY random() LIMIT 10
+        SELECT DISTINCT artist.id, artist.name, random()
+            FROM artist
+            JOIN song ON song.artist = artist.id 
+            WHERE song.album IS NOT NULL
+            ORDER BY random() LIMIT 10
         });
     $query->execute();
 }

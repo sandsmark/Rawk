@@ -1,20 +1,3 @@
-/**
- * SoundManager 2 Demo: "Page as playlist" UI
- * ----------------------------------------------
- * http://schillmania.com/projects/soundmanager2/
- *
- * An example of a Muxtape.com-style UI, where an
- * unordered list of MP3 links becomes a playlist
- *
- * Flash 9 "MovieStar" edition supports MPEG4
- * audio as well.
- *
- * Requires SoundManager 2 Javascript API.
- */
-
-/*jslint white: false, onevar: true, undef: true, nomen: false, eqeqeq: true, plusplus: false, bitwise: true, newcap: true, immed: true */
-/*global soundManager, window, document, navigator, setTimeout, attachEvent, Metadata, PP_CONFIG */
-
 var pagePlayer = null;
 
 function PagePlayer() {
@@ -32,10 +15,6 @@ function PagePlayer() {
       supportsFavicon = (ua.match(/(opera|firefox)/i)),
       isTouchDevice = (ua.match(/ipad|ipod|iphone/i)),
       cleanup;
-
-  // configuration options
-  // note that if Flash 9 is required, you must set soundManager.flashVersion = 9 in your script before this point.
-
   this.config = {
     usePeakData: false,     // [Flash 9 only]: show peak data
     useWaveformData: false, // [Flash 9 only]: enable sound spectrum (raw waveform data) - WARNING: CPU-INTENSIVE: may set CPUs on fire.

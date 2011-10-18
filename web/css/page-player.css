@@ -54,50 +54,31 @@ ul.playlist {
 }
 
 ul.playlist li {
- /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
- position:relative;
- display:block;
- width:auto;
- font-size:2em;
- color:#666;
- padding:0.25em 0.5em 0.25em 0.5em;
- border:none;
- letter-spacing:-1px; /* ZOMG WEB X.0. ;) */
- background-color:#f9f9f9;
- -webkit-transition-property: hover;
- -webkit-transition: background-color 0.15s ease-in-out;
- -moz-transition: background-color 0.15s linear 0s; /* firefox 4 */
-  -o-transition-property: background-color; /* opera 10.5 */
-  -o-transition-duration: 0.15s;
-
-}
-
-ul.playlist li a {
- display:block;
- text-decoration:none;
- font-weight:normal;
- color:#000;
- font-size:120%;
- outline:none;
- position:relative;
- z-index:2;
-}
-
-ul.playlist li.sm2_playing,
-ul.playlist li.sm2_paused,
-ul.playlist li.sm2_playing a {
- color:#fff;
- border-radius:3px;
- -webkit-border-radius:3px;
- -moz-border-radius:3px;
+    /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
+    position:relative;
+    width:auto;
+    color:#666;
+    border:none;
+    letter-spacing:-1px; /* ZOMG WEB X.0. ;) */
+    font-size:1.2em;
+    -webkit-transition-property: hover;
+    -webkit-transition: background-color 0.15s ease-in-out;
+    -moz-transition: background-color 0.15s linear 0s; /* firefox 4 */
+    -o-transition-property: background-color; /* opera 10.5 */
+    -o-transition-duration: 0.15s;
 }
 
 ul.playlist li:hover {
  background-color:#eee;
-}
+ }
 
-ul.playlist li:hover a {
- color:#333;
+ul.playlist li.sm2_playing,
+ul.playlist li.sm2_paused,
+ul.playlist li.sm2_playing a {
+ color:#000;
+ border-radius:3px;
+ -webkit-border-radius:3px;
+ -moz-border-radius:3px;
 }
 
 ul.playlist li.sm2_playing,
@@ -111,7 +92,7 @@ ul.playlist li.sm2_paused {
 
 ul.playlist li.sm2_playing:hover a,
 ul.playlist li.sm2_paused a {
- color:#fff;
+ color:#000;
 }
 
 ul.playlist li .controls {
@@ -168,10 +149,6 @@ ul.playlist li .controls .statusbar {
  position:relative;
  height:0.5em;
  background-color:#ccddff;
- border:2px solid #fff;
- border-radius:2px;
- -moz-border-radius:2px;
- -webkit-border-radius:2px;
  overflow:hidden;
  cursor:-moz-grab;
  cursor:grab;
@@ -194,8 +171,7 @@ ul.playlist li .controls .statusbar .annotation {
 ul.playlist li .controls .statusbar .position {
  background-color:#336699;
  border-right:3px solid #336699;
- border-radius:3px;
- -moz-border-radius:3px;
+ border-radius:0px 0px 3px 3px;
  -webkit-border-radius:3px;
 }
 
