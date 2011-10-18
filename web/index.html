@@ -40,6 +40,7 @@ var PP_CONFIG = {
             <div id="playlistsbox" class="containerbox">
                 <h2>playlists</h2>
                 <a href="javascript:add_playlist()">add playlist</a>
+                <input id="newplaylistinput" onkeyup="javascript:create_playlist(event)" />
             </div>
             <div id="artistsbox" class="containerbox">
                 <h2 onclick="javascript:$('#artists').toggle();" style="cursor:pointer">artists</h2>

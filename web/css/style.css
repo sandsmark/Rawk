@@ -149,10 +149,17 @@ li.selectable {
 }
 
 li.selectable :hover {
+}
+
+.selectable-active {
+ background-color:blue;
+ color: red;
+}
+
+#newplaylistinput {
+    display: none;
+}
+
+.ui-droppable :hover {
  background-color:#eee;
 }
-
-#selectable-active {
- background-color:blue;
-}
-

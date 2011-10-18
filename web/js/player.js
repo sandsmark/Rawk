@@ -6,7 +6,6 @@ $(document).ready(function() {
     request = $.getJSON('cgi-bin/get-artists.pl', function(data) {
             replace_artists(data);
             request_running = false;
-            $('#artists').hide();
             });
 
   replace_playlist_with_album(427);
@@ -65,7 +64,7 @@ function get_playlists() {
            drop: function(event, ui) { 
                 var song = ui.draggable.attr('song');
                 var playlist = $(this).attr('playlist');
-                $.get('cgi-bin/add-song-to-playlist.pl', 'song=' + song + '&playlist=' + playlist);
+                $.get('cgi-bin/add-song-to-playlist.pl', {'song': song, 'playlist': playlist});
            }
       });
   });
@@ -110,5 +109,19 @@ function artist_search(event, form) {
             replace_artists(data);
             request_running = false;
             });
+}
+
+function add_playlist() {
+    $('#newplaylistinput').toggle();
+}
+
+function create_playlist(event) {
+        if(event.keyCode == 13){
+            $('#newplaylistinput').hide();
+            var name = $('#newplaylistinput').val();
+            $.get('cgi-bin/create-playlist.pl', 'name=' + name, function() {
+                get_playlists();
+            });
+        }
 }
 
