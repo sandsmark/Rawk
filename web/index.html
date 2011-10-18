@@ -5,24 +5,20 @@
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/page-player.css" />
-  <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
   <script type="text/javascript" src="js/player.js"></script>
-  <script type="text/javascript" src="soundmanager/script/soundmanager2.js"></script>
+  <script type="text/javascript" src="js/soundmanager2-nodebug-jsmin.js"></script>
   <script type="text/javascript">
 soundManager.flashVersion = 9;
 soundManager.preferFlash = true; // for visualization effects
 soundManager.useHighPerformance = true; // keep flash on screen, boost performance
 soundManager.wmode = 'transparent'; // transparent SWF, if possible
 soundManager.useFastPolling = true; // increased JS callback frequency
-soundManager.url = 'soundmanager/swf/';
-soundManager.debugMode = false;
-
-
+soundManager.url = 'swf/';
+soundManager.debugMode = true;
 
 // custom page player configuration
-
-
-
 var PP_CONFIG = {
   autoStart: false,      // begin playing first sound when page loads
   playNext: true,        // stop after one sound, or play through list until end
@@ -43,12 +39,11 @@ var PP_CONFIG = {
         <div id="control">
             <div id="playlistsbox" class="containerbox">
                 <h2>playlists</h2>
-                <!--           <input name="playlistsearch" />-->
                 <a href="javascript:add_playlist()">add playlist</a>
             </div>
             <div id="artistsbox" class="containerbox">
-            <h2>artists</h2>
-                <input id="artistsearchinput" onkeypress="javascript:artist_search(event, this.form);"/>
+                <h2 onclick="javascript:$('#artists').toggle();" style="cursor:pointer">artists</h2>
+                <input id="artistsearchinput" onfocus="javascript:$('#artists').show();" onkeypress="javascript:artist_search(event, this.form);"/>
             </div>
             <div id="albumsbox" class="containerbox">
             <h2>albums</h2>

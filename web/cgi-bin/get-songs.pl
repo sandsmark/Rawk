@@ -26,7 +26,18 @@ if (defined($album)) {
         });
     $query->execute($album);
 } elsif (defined($playlist)) {
-    # TODO
+    $query = Rawk::db->prepare(q{
+        SELECT DISTINCT
+            song.id, artist.name || ' - ' ||  song.title, song.tracknumber
+        FROM song, artist, album, playlistitem
+        WHERE
+            playlistitem.playlist = ?
+            AND playlistitem.song = song.id
+            AND song.album = album.id
+            AND song.artist = artist.id
+        ORDER BY song.tracknumber
+        });
+    $query->execute($playlist);
 }
 
 

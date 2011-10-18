@@ -11,18 +11,23 @@ use JSON;
 my $artist = CGI::param('artist');
 
 my $query;
-if (defined($artist)) {
+
+if (!defined($artist)) {
+    $artist = '';
+}
+
+if ($artist ne '') {
     $query = Rawk::db->prepare(q{
-        SELECT DISTINCT id, name FROM artist WHERE name ILIKE ? ORDER BY name LIMIT 10
+        SELECT DISTINCT id, name FROM artist WHERE name ILIKE ? ORDER BY name LIMIT 50
         });
     $query->execute("%$artist%");
 } else {
     $query = Rawk::db->prepare(q{
-        SELECT DISTINCT artist.id, artist.name, random()
+        SELECT artist.id, artist.name
             FROM artist
             JOIN song ON song.artist = artist.id 
             WHERE song.album IS NOT NULL
-            ORDER BY random() LIMIT 10
+            ORDER BY random() LIMIT 12
         });
     $query->execute();
 }
