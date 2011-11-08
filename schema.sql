@@ -29,3 +29,8 @@ CREATE TABLE playlistitem (
     song INTEGER NOT NULL REFERENCES song,
     playlist INTEGER NOT NULL REFERENCES playlist
 );
+
+CREATE TABLE starred (
+    id SERIAL PRIMARY KEY,
+    song INTEGER NOT NULL REFERENCES song
+);
