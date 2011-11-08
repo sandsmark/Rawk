@@ -38,6 +38,18 @@ if (defined($album)) {
         ORDER BY song.tracknumber
         });
     $query->execute($playlist);
+} else {
+    $query = Rawk::db->prepare(q{
+        SELECT DISTINCT
+            song.id, artist.name || ' - ' ||  song.title, song.tracknumber
+        FROM song, artist, album, starred
+        WHERE
+            AND starred.song = song.id
+            AND song.album = album.id
+            AND song.artist = artist.id
+        ORDER BY song.tracknumber
+        });
+    $query->execute();
 }
 
 
