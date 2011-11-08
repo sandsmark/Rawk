@@ -150,6 +150,19 @@ sub handle_file {
     }
 }
 
+# Clean out removed files
+my $query = Rawk::db->prepare(q{
+    SELECT path FROM song
+});
+
+$query->execute() or die("unable to get paths");
+while (my $row = $query->fetchrow_hashref()) {
+    unless (-e $row->{'path'}) {
+        print "Deleting removed file ".$row->{'path'};
+        Rawk::db->do(q{ DELETE FROM song WHERE path = ? }, {}, $row->{'path'});
+    }
+}
+
 my @directories;
 push(@directories, Rawk::config('MUSIC_PATH'));
 find(\&handle_file, @directories);
