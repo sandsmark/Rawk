@@ -84,6 +84,13 @@ h2 {
 
 #searchinput {
     width: 100%;
+    border: 0px;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    background-image: url(http://music.mts.ms/image/search.png);
+    background-repeat: no-repeat;
+    height:16px;
+/*    background: #000;*/
 }
 
 li {
