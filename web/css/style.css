@@ -38,6 +38,11 @@ h2 {
     margin: 0px;
 }
 
+.playlist {
+    width: 100%;
+    padding-left: 5px;
+}
+
 #artists {
     padding: 0px;
     margin: 0px;
@@ -72,9 +77,13 @@ h2 {
     border: 15px white;
     background: white;
     border-radius: 0px 0px 0px 7px;
-    padding-left: 5px;
+    padding-left: 0px;
     padding-bottom: 5px;
     margin-bottom: 15px;
+}
+
+#searchinput {
+    width: 100%;
 }
 
 li {
@@ -134,26 +143,26 @@ input {
 }
 
 li.selectable {
+    /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
     position:relative;
     width:auto;
     color:#666;
     border:none;
     letter-spacing:-1px; /* ZOMG WEB X.0. ;) */
     font-size:1.2em;
-    background-color:#fff;
-    -moz-transition: background-color 15s linear 0s; /* firefox 4 */
     -webkit-transition-property: hover;
     -webkit-transition: background-color 0.15s ease-in-out;
+    -moz-transition: background-color 0.15s linear 0s; /* firefox 4 */
     -o-transition-property: background-color; /* opera 10.5 */
     -o-transition-duration: 0.15s;
 }
 
 li.selectable :hover {
+    background-color:#eee;
 }
 
-.selectable-active {
- background-color:blue;
- color: red;
+li.selectable-active {
+ background-color:#6699cc;
 }
 
 #newplaylistinput {
@@ -163,3 +172,4 @@ li.selectable :hover {
 .ui-droppable :hover {
  background-color:#eee;
 }
+

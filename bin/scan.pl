@@ -154,15 +154,16 @@ sub handle_file {
 my $query = Rawk::db->prepare(q{
     SELECT path FROM song
 });
-
 $query->execute() or die("unable to get paths");
 while (my $row = $query->fetchrow_hashref()) {
     unless (-e $row->{'path'}) {
-        print "Deleting removed file ".$row->{'path'};
+        print "Deleting removed file $row->{'path'}\n";
         Rawk::db->do(q{ DELETE FROM song WHERE path = ? }, {}, $row->{'path'});
     }
 }
 
+
+# Scan for new files
 my @directories;
 push(@directories, Rawk::config('MUSIC_PATH'));
 find(\&handle_file, @directories);
