@@ -1,15 +1,10 @@
 var request;
 var request_running = false;
-var currentAlbum = "";
-var currentPlaylist = "";
-var currentArtist = "";
+var current_playlist;
+var current_song;
 
 $(document).ready(function() {
     request_running = true;
-    request = $.getJSON('cgi-bin/get-artists.pl', function(data) {
-            replace_artists(data);
-            request_running = false;
-            });
 
     request = $.getJSON('cgi-bin/get-songs.pl', function(data) {
             replace_playlist(data);
@@ -33,27 +28,46 @@ function replace_artists(data) {
 }
 
 function replace_playlist(data) {
-      var items = [];
+    var items = [];
 
-      $('.playlist').remove();
+    $('.playlist').remove();
+    current_playlist = [];
+    $.each(data, function(song_id, val) {
+            current_playlist.push(val['id']);
+            var star_checked = "";
+            if (val['starred'] == 1) {
+                star_checked = "checked";
+            }
 
-      $.each(data, function(song_id, val) {
-          items.push('<tr>' +
-              '<td><a href="cgi-bin/get-song.pl?id=' + val['id'] + '" class="playable">' + val['title'] + '</a></td>' + 
-              '<td><a href="#artist=' + val['artistid'] + '">' + val['artist'] + '</a></td>' +
-              '<td><a href="#album=' + val['albumid'] + '">' + val['album'] + '</a></td>' +
-              '</td>');
-          });
+            items.push('<tr class="selectable">' +
+                '<td><input type="checkbox" onclick="javascript:star_song(' + val['id'] + ')" ' + star_checked + ' id="star_' + val['id'] + '" />' +
+                '<a href="cgi-bin/get-song.pl?id=' + val['id'] + '" class="playable">' + val['title'] + '</a></td>' + 
+                '<td><a href="#artist=' + val['artistid'] + '">' + val['artist'] + '</a></td>' +
+                '<td><a href="#album=' + val['albumid'] + '">' + val['album'] + '</a></td>' +
+                '</td>');
+            });
 
-      $('<table/>', {
-          'class': 'playlist',
-          html: items.join('')
-          }).appendTo('#playlistcontainer');
+    $('<table/>', {
+            'class': 'playlist',
+            html: items.join('')
+            }).appendTo('#playlistcontainer');
 
-      $('.playlist li').draggable({
+    $('.playlist tr').draggable({
         appendTo: 'body',
         helper: 'clone'
-      });
+    });
+}
+
+function star_song(song) {
+    if ($('#star_' + song).is(":checked")) {
+        request = $.getJSON('cgi-bin/star-song.pl?star=' + song, function(data) {
+                $('#star_' + song).attr("checked", true);
+                });
+    } else {
+        request = $.getJSON('cgi-bin/star-song.pl?unstar=' + song, function(data) {
+                $('#star_' + song).attr("checked", false);
+                });
+    }
 }
 
 function get_playlists() {
@@ -80,60 +94,6 @@ function get_playlists() {
   });
 }
 
-function replace_albums_for_artist(artist) {
-  $.getJSON('cgi-bin/get-albums.pl?artist=' + artist, function(data) {
-      var items = [];
-
-      $.each(data, function(listId, album) {
-          items.push('<li class="selectable" id="artist' + listId + '"><a href="javascript:replace_playlist_with_album(' + album[0] + ')">' + album[1] + '</a></li>');
-          });
-
-      $('#albums').remove();
-      $('<ul/>', {
-          'id': 'albums',
-          html: items.join('')
-          }).appendTo('#albumsbox');
-      });
-}
-
-function replace_playlist_with_playlist(playlist) {
-  $.getJSON('cgi-bin/get-songs.pl?playlist=' + playlist, function(data) {
-          replace_playlist(data);
-      });
-}
-
-function replace_playlist_with_album(album) {
-  $.getJSON('cgi-bin/get-songs.pl?album=' + album, function(data) {
-          replace_playlist(data);
-      });
-}
-
-function replace_playlist_with_artist(artist) {
-  $.getJSON('cgi-bin/get-songs.pl?artist=' + artist, function(data) {
-          replace_playlist(data);
-      });
-}
-
-function replace_playlist_with_search(search) {
-  $.getJSON('cgi-bin/get-songs.pl?search=' + search, function(data) {
-          replace_playlist(data);
-      });
-}
-
-
-function artist_search(event, form) {
-    if (request_running) {
-        request.abort();
-    }
-
-    request_running = true;
-    var artist_string = $('#artistsearchinput').val();
-    request = $.getJSON('cgi-bin/get-artists.pl?artist=' + artist_string, function(data) {
-            replace_artists(data);
-            request_running = false;
-            });
-}
-
 function add_playlist() {
     $('#newplaylistinput').toggle();
 }
@@ -149,7 +109,6 @@ function create_playlist() {
 function do_search() {
     var query = $('#searchinput').val();
     location.hash = "#search=" + query;
-
 }
 
 $(function(){

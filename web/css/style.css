@@ -137,11 +137,6 @@ a {
     overflow:scroll;
 }
 
-input {
-    width: 180px;
-    margin: 0px;
-}
-
 li.selectable {
     /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
     position:relative;
